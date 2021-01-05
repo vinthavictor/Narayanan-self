@@ -119,88 +119,89 @@ chimney4.scale=0.5;
 
 }
 function draw(){
- 
+  console.log(gameState)
   if(gameState==="Play"){
 
     background("white");
- var x=70;
- console.log(lifecount)
-for(var i=1;i<=lifecount;i++){
-  lifesprites=createSprite(x,120,10,10);
-  x=x+50
-  lifesprites.addImage(hearti)
-  lifesprites.scale=0.2
-  lifeSpritegrp.add(lifesprites);
-}
+    var x=70;
+    //console.log(lifecount)
+    for(var i=1;i<=lifecount;i++){
+      lifesprites=createSprite(x,120,10,10);
+      x=x+50
+      lifesprites.addImage(hearti)
+      lifesprites.scale=0.2
+      lifeSpritegrp.add(lifesprites);
+  }
   
-if(fireball.isTouching(waterball1)||fireball.isTouching(waterball2)||fireball.isTouching(waterball3)||fireball.isTouching(waterball4)||score===3){
-  prince.destroy();
-chimney1.destroy();
-chimney2.destroy();
-chimney3.destroy();
-chimney4.destroy();
-fireball.destroy();
-target.destroy(); 
-waterball1.destroy();
-waterball2.destroy();
-waterball3.destroy();
-waterball4.destroy();
-invisible.destroy();
-lifeSpritegrp.destroyEach();
 
-
-gameSate="end";
-}
-
-if(keyDown(RIGHT_ARROW)&&fireball){
-  fireball.x=fireball.x+20;
-}
-if(keyDown(UP_ARROW)){
-  fireball.y=fireball.y-10;
-}
-if(keyDown(DOWN_ARROW)){
-  fireball.y=fireball.y+10;
-}
-if(waterball1.y>720){
-  waterball1.y=10;
-}
-if(waterball2.y<69){
-  waterball2.y=670;
-}
-if(waterball3.y>720){
-  waterball3.y=10;
-}
-if(waterball4.y<69){
-  waterball4.y=670;
-}
-if(fireball.x===1380){
-fire=createSprite(1370,240);
-fire.addImage(firei)
-fire.visible=true;
-fire.scale=0.3;
-score=score+1;
-}
+  if(keyDown(RIGHT_ARROW)&&fireball){
+    fireball.x=fireball.x+20;
+  }
+  if(keyDown(UP_ARROW)){
+    fireball.y=fireball.y-10;
+  }
+  if(keyDown(DOWN_ARROW)){
+    fireball.y=fireball.y+10;
+  }
+  if(waterball1.y>720){
+    waterball1.y=10;
+  }
+  if(waterball2.y<69){
+    waterball2.y=670;
+  }
+  if(waterball3.y>720){
+    waterball3.y=10;
+  }
+  if(waterball4.y<69){
+    waterball4.y=670;
+  }
+  if(fireball.x===1380){
+  fire=createSprite(1370,240);
+  fire.addImage(firei)
+  fire.visible=true;
+  fire.scale=0.3;
+  score=score+1;
+  }
 // if(fireball.isTouching(target)){
 // console.log(lifecount)
 // }
-if(fireball.x===1500){
-  fireball.x=40;
-  lifecount=lifecount-1;
+  if(fireball.x===1500){
+    fireball.x=40;
+    lifecount=lifecount-1;
+    lifeSpritegrp.destroyEach();
+    fire.visible=false;
+  }
+  if(fireball.isTouching(waterball1)||fireball.isTouching(waterball2)||fireball.isTouching(waterball3)||fireball.isTouching(waterball4)||score===3){
+    prince.destroy();
+  chimney1.destroy();
+  chimney2.destroy();
+  chimney3.destroy();
+  chimney4.destroy();
+  fireball.destroy();
+  target.destroy(); 
+  waterball1.destroy();
+  waterball2.destroy();
+  waterball3.destroy();
+  waterball4.destroy();
+  invisible.destroy();
   lifeSpritegrp.destroyEach();
-  fire.visible=false;
-}
-fill("red")
-textSize(30)
-  text("Score:"+score,80,62);
-  drawSprites();
-}
-if(gameState==="end"){
-  end();
-  background("white");
-}
+
+//spelling mistake here it was gamesate
+  gameState="end";
+  }
+    fill("red")
+    textSize(30)
+    text("Score:"+score,80,62);
+    drawSprites();
+  }
+  if(gameState==="end"){
+    end();  
+  }
 }
 function end(){
+  background("white");
+ 
   fill("black");
   textSize(30);
-  text("OOPS!!! sorry prince you failed to win the test. But its ok, if you win the next level you can marry the princess",width/2,height-30)
+  text("OOPS!!! sorry prince you failed to win the test. But its ok, if you win the next level you can marry the princess",width/2-500,height-30)
 }
